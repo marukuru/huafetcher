@@ -21,12 +21,12 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ListAlt
+import androidx.compose.material.icons.automirrored.filled.OpenInNew
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.FolderOpen
 import androidx.compose.material.icons.filled.Key
-import androidx.compose.material.icons.filled.ListAlt
-import androidx.compose.material.icons.filled.OpenInNew
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.ViewCompact
@@ -108,7 +108,7 @@ fun SettingsScreen(
                         onClick = onNavigateBack,
                         modifier = Modifier.testTag("btn_back_from_settings")
                     ) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -168,7 +168,7 @@ fun SettingsScreen(
                             onClick = { viewModel.setLoginMethod(LoginMethod.XIAOMI) },
                             shape = SegmentedButtonDefaults.itemShape(index = 1, count = 2),
                             icon = {
-                                Icon(Icons.Default.OpenInNew, contentDescription = null, modifier = Modifier.size(18.dp))
+                                Icon(Icons.AutoMirrored.Filled.OpenInNew, contentDescription = null, modifier = Modifier.size(18.dp))
                             },
                             modifier = Modifier.testTag("settings_method_xiaomi")
                         ) {
@@ -434,7 +434,7 @@ fun SettingsScreen(
                             modifier = Modifier.weight(1f)
                         ) {
                             Icon(
-                                Icons.Default.ListAlt,
+                                Icons.AutoMirrored.Filled.ListAlt,
                                 contentDescription = null,
                                 tint = MaterialTheme.colorScheme.primary
                             )

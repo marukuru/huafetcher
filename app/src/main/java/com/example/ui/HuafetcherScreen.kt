@@ -42,7 +42,7 @@ import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Key
-import androidx.compose.material.icons.filled.OpenInNew
+import androidx.compose.material.icons.automirrored.filled.OpenInNew
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Share
@@ -59,8 +59,8 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -247,7 +247,7 @@ fun HuafetcherScreen(
                             shape = SegmentedButtonDefaults.itemShape(index = 1, count = 2),
                             icon = {
                                 Icon(
-                                    Icons.Default.OpenInNew,
+                                    Icons.AutoMirrored.Filled.OpenInNew,
                                     contentDescription = null,
                                     modifier = Modifier.size(18.dp)
                                 )
@@ -372,7 +372,7 @@ fun HuafetcherScreen(
                                     .fillMaxWidth()
                                     .testTag("btn_open_xiaomi_login")
                             ) {
-                                Icon(Icons.Default.OpenInNew, contentDescription = null, modifier = Modifier.size(18.dp))
+                                Icon(Icons.AutoMirrored.Filled.OpenInNew, contentDescription = null, modifier = Modifier.size(18.dp))
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Text("Open Xiaomi Login in Browser")
                             }
@@ -883,7 +883,7 @@ fun HuafetcherScreen(
                                 }
                             }
 
-                            Divider(color = Color(0xFF313244))
+                            HorizontalDivider(color = Color(0xFF313244))
 
                             Box(
                                 modifier = Modifier

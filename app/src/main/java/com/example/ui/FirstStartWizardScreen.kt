@@ -21,10 +21,10 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.automirrored.filled.OpenInNew
 import androidx.compose.material.icons.filled.FolderOpen
 import androidx.compose.material.icons.filled.Key
-import androidx.compose.material.icons.filled.OpenInNew
 import androidx.compose.material.icons.filled.IosShare
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.Watch
@@ -188,7 +188,7 @@ fun FirstStartWizardScreen(
                             onClick = { selectedMethod = LoginMethod.XIAOMI },
                             shape = SegmentedButtonDefaults.itemShape(index = 1, count = 2),
                             icon = {
-                                Icon(Icons.Default.OpenInNew, contentDescription = null, modifier = Modifier.size(18.dp))
+                                Icon(Icons.AutoMirrored.Filled.OpenInNew, contentDescription = null, modifier = Modifier.size(18.dp))
                             },
                             modifier = Modifier.testTag("wizard_method_xiaomi")
                         ) {
@@ -364,7 +364,7 @@ fun FirstStartWizardScreen(
             ) {
                 Text("Complete Setup & Get Started", fontSize = 16.sp, fontWeight = FontWeight.Bold)
                 Spacer(modifier = Modifier.width(8.dp))
-                Icon(Icons.Default.ArrowForward, contentDescription = null)
+                Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null)
             }
 
             Spacer(modifier = Modifier.height(16.dp))
