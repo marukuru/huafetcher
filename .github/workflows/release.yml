@@ -29,7 +29,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
 
       - name: Grant Execute Permission for Gradlew
-        run: chmod +x gradlew
+        run: chmod +x gradlew || true
 
       - name: Setup Keystores
         run: |
@@ -47,11 +47,11 @@ jobs:
 
       - name: Show Kotlin configuration
         run: |
-          gradlew --version
-          gradlew :app:compileDebugKotlin --info
+        ./gradlew --version
+        ./gradlew :app:compileDebugKotlin --info
 
       - name: Build Release and Debug APKs
-        run: gradlew assembleRelease assembleDebug
+        run: gradle assembleRelease assembleDebug
         env:
           KEYSTORE_PATH: ${{ github.workspace }}/release.keystore
           STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
