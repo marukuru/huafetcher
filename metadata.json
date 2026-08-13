@@ -1,0 +1,6 @@
+{
+  "name": "Huafetcher",
+  "description": "Amazfit & Xiaomi wearable auth key and aGPS data fetcher",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
