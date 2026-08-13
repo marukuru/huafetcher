@@ -212,18 +212,22 @@ class HuamiApiService(
      * Check if component files required for building aGPS_UIHH.bin are present.
      */
     fun hasUihhComponentFiles(): Boolean {
-        val workDir = getDataDirectory()
-        if (!workDir.exists()) return false
-        val componentFiles = listOf(
-            "gps_alm.bin",
-            "gln_alm.bin",
-            "lle_bds.lle",
-            "lle_gps.lle",
-            "lle_glo.lle",
-            "lle_gal.lle",
-            "lle_qzss.lle"
-        )
-        return componentFiles.any { File(workDir, it).exists() }
+        return try {
+            val workDir = getDataDirectory()
+            if (!workDir.exists()) return false
+            val componentFiles = listOf(
+                "gps_alm.bin",
+                "gln_alm.bin",
+                "lle_bds.lle",
+                "lle_gps.lle",
+                "lle_glo.lle",
+                "lle_gal.lle",
+                "lle_qzss.lle"
+            )
+            componentFiles.any { File(workDir, it).exists() }
+        } catch (e: Exception) {
+            false
+        }
     }
 
     /**
@@ -235,19 +239,29 @@ class HuamiApiService(
         val rawFolderName = pm.customFolderName.trim()
         val folderName = if (rawFolderName.isBlank()) "Huafetcher" else rawFolderName
 
-        val targetDir: File = when (dirType) {
-            "INTERNAL" -> File(context.filesDir, folderName)
-            "PUBLIC_DOWNLOADS" -> {
-                val downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                File(downloadsDir, folderName)
+        val targetDir: File = try {
+            when (dirType) {
+                "INTERNAL" -> File(context.filesDir, folderName)
+                "PUBLIC_DOWNLOADS" -> {
+                    val downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                    File(downloadsDir, folderName)
+                }
+                else -> { // "EXTERNAL"
+                    context.getExternalFilesDir(folderName) ?: File(context.filesDir, folderName)
+                }
             }
-            else -> { // "EXTERNAL"
-                context.getExternalFilesDir(folderName) ?: File(context.filesDir, folderName)
-            }
+        } catch (e: Exception) {
+            File(context.filesDir, folderName)
         }
 
-        if (!targetDir.exists()) {
-            targetDir.mkdirs()
+        try {
+            if (!targetDir.exists()) {
+                targetDir.mkdirs()
+            }
+        } catch (e: Exception) {
+            val fallback = File(context.filesDir, folderName)
+            if (!fallback.exists()) fallback.mkdirs()
+            return fallback
         }
 
         return targetDir
