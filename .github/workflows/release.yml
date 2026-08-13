@@ -45,13 +45,15 @@ jobs:
             keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
           fi
 
+      # FIXED: Added correct 2-space indentation below the pipe (|)
       - name: Show Kotlin configuration
         run: |
-        ./gradlew --version
-        ./gradlew :app:compileDebugKotlin --info
+          ./gradlew --version
+          ./gradlew :app:compileDebugKotlin --info
 
+      # FIXED: Changed 'gradle' to './gradlew'
       - name: Build Release and Debug APKs
-        run: gradle assembleRelease assembleDebug
+        run: ./gradlew assembleRelease assembleDebug
         env:
           KEYSTORE_PATH: ${{ github.workspace }}/release.keystore
           STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
