@@ -60,6 +60,12 @@ jobs:
           echo "TAG_NAME=v1.0.${{ github.run_number }}" >> $GITHUB_OUTPUT
           echo "RELEASE_NAME=Release v1.0.${{ github.run_number }}" >> $GITHUB_OUTPUT
 
+      # ADDED: Rename the APKs using the tag generated in the previous step
+      - name: Rename APKs
+        run: |
+          mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/huafetcher-${{ steps.tag.outputs.TAG_NAME }}-debug.apk
+          mv app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/huafetcher-${{ steps.tag.outputs.TAG_NAME }}.apk
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
@@ -68,6 +74,7 @@ jobs:
           draft: false
           prerelease: false
           generate_release_notes: true
+          # The wildcards here will now perfectly capture your newly renamed files
           files: |
             app/build/outputs/apk/release/*.apk
             app/build/outputs/apk/debug/*.apk
