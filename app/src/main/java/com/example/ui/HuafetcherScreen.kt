@@ -652,8 +652,9 @@ fun HuafetcherScreen(
                                 )
                             }
 
+                            val modDateStr = if (file.formattedLastModified.isNotBlank()) "\nModified: ${file.formattedLastModified}" else ""
                             Text(
-                                text = "File Name: ${file.name}\nSize: ${file.sizeBytes / 1024} KB\nPath: ${file.path}",
+                                text = "File Name: ${file.name}\nSize: ${file.sizeBytes / 1024} KB$modDateStr\nPath: ${file.path}",
                                 style = MaterialTheme.typography.bodySmall.copy(
                                     fontFamily = FontFamily.Monospace
                                 )
@@ -805,11 +806,28 @@ fun HuafetcherScreen(
                                                 }
                                             }
 
-                                            Text(
-                                                text = "${fileItem.sizeBytes / 1024} KB",
-                                                style = MaterialTheme.typography.labelSmall,
-                                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                                            )
+                                            Row(
+                                                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                                verticalAlignment = Alignment.CenterVertically
+                                            ) {
+                                                Text(
+                                                    text = "${fileItem.sizeBytes / 1024} KB",
+                                                    style = MaterialTheme.typography.labelSmall,
+                                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                                )
+                                                if (fileItem.formattedLastModified.isNotBlank()) {
+                                                    Text(
+                                                        text = "•",
+                                                        style = MaterialTheme.typography.labelSmall,
+                                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                                    )
+                                                    Text(
+                                                        text = fileItem.formattedLastModified,
+                                                        style = MaterialTheme.typography.labelSmall,
+                                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                                    )
+                                                }
+                                            }
                                         }
 
                                         Row {

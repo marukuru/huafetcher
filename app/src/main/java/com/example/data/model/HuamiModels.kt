@@ -1,5 +1,9 @@
 package com.example.data.model
 
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+
 enum class LoginMethod {
     AMAZFIT,
     XIAOMI
@@ -34,4 +38,11 @@ data class GeneratedFile(
     val path: String,
     val sizeBytes: Long,
     val lastModified: Long
-)
+) {
+    val formattedLastModified: String
+        get() = if (lastModified > 0L) {
+            SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date(lastModified))
+        } else {
+            ""
+        }
+}
